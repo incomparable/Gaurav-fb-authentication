@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile Page</title>
+	<meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="favicon2.ico" type="image/x-icon">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> 
+    <style type="text/css">
+    	body{
+    		text-align: center;
+    		font-family: monospace;
+    		padding-top:80px;
+    	}
+
+    	.main img{
+    		width: 193px;
+    	}
+
+    </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		if (window.location.hash && window.location.hash === "#_=_") {
+		  if (Modernizr.history) {
+		    window.history.replaceState("", document.title, window.location.pathname);
+		  } else {
+		    // Prevent scrolling by storing the page's current scroll offset
+		    var scroll = {
+		      top: document.body.scrollTop,
+		      left: document.body.scrollLeft
+		    };
+		    window.location.hash = "";
+		    // Restore the scroll offset, should be flicker free
+		    document.body.scrollTop = scroll.top;
+		    document.body.scrollLeft = scroll.left;
+		  }
+		}
+		$.ajax({
+			method:"POST",
+	        url:'/getdata',
+	        success:function(res){
+	           //console.log(res);
+	           $("#main img").attr('src',res.facebook.profile_pic);
+	           $("#main h3").text(res.facebook.name);
+	           $("#main p").text('Your loggedIn Count to our app is:'+res.facebook.login_cnt);
+	        },
+	        error:function(err){
+	            console.log(err);
+	        }
+		})
+	})
+</script>
+
+<div class="main" id="main">
+	<h2>
+		Profile Page
+	</h2>
+	<img src=""/>
+	<h3></h3>
+	<p></p>
+</div>
+
+
+<a href="/logout" class="btn btn-primary"><span class="fa fa-reply"></span> Logout</a>
+
+</body>
+</html>
