@@ -1,0 +1,357 @@
+{% extends "base.html" %}
+{% block title %}Dashboard {% endblock %}
+{% block head %}
+<style>
+    .clearfix {
+    float: right;
+    overflow: auto;
+}
+
+body {
+    counter-reset: my-sec-counter;
+}
+
+h6:before {
+    counter-increment: my-sec-counter;
+    content: "" counter(my-sec-counter) ". ";
+}
+</style>
+  {{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fade.css') }}">
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
+<script src="{{ url_for('static', filename='js/d3/d3pie.js') }}"></script>
+<script src="{{ url_for('static', filename='js/campaign.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
+{% endblock %}
+{% block content %}
+<input type="hidden" id="campaign_id" value="{{campaign_id}}"/>
+<div class="important">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row" id="main" >
+                <div class="col-sm-12 col-md-12">
+                    <div style="font-size:28px; color:blue; margin-top: 10px;">
+                            {{campaign_name}}
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div id="chartContainer"></div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div>
+                        <div style="font-size:24px;margin-top: 10px;">
+                            Email(s) Sent /Error/ Total Email(s)
+
+                                <button onclick="myFunction()" class="btn btn-info btn-lg" style="float:right;"
+                                        data-toggle="tooltip" data-placement="bottom" title="Reload Deshboard">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </button>
+
+                                <a href="/create-campaign" onclick="myFunction()" class="btn btn-info btn-lg"
+                                   style="float:right;margin-right:10px;" data-toggle="tooltip" data-placement="bottom"
+                                   title="Create New Campaign">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                        </div>
+
+                        <div style="/* text-align:center; */padding-top: 28%;padding-left: 23%;">
+                            <span style="font-size:80px;color:green;">{{send_emails_len}}</span>
+                            <span style="font-size:50px;color:red;">/{{error_emails_len}}</span>
+                            <span style="font-size:16px;">/ {{sent_error_emails_len}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12">
+                    <div style="font-size:18px;margin-top: 10px;">
+                            Email Result(s)
+                    </div>
+                    <script>
+$('td', 'table').each(function(i) {
+    $(this).text(i+1);
+});
+
+
+
+$('table.paginated').each(function() {
+    var currentPage = 0;
+    var numPerPage = 10;
+    var $table = $(this);
+    $table.bind('repaginate', function() {
+        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+    });
+    $table.trigger('repaginate');
+    var numRows = $table.find('tbody tr').length;
+    var numPages = Math.ceil(numRows / numPerPage);
+    var $pager = $('<div class="pager"></div>');
+    for (var page = 0; page < numPages; page++) {
+        $('<span class="page-number"></span>').text(page + 1).bind('click', {
+            newPage: page
+        }, function(event) {
+            currentPage = event.data['newPage'];
+            $table.trigger('repaginate');
+            $(this).addClass('active').siblings().removeClass('active');
+        }).appendTo($pager).addClass('clickable');
+    }
+    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+});
+</script>
+                    <table class="table table-bordered paginated">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>#</th>
+                                <th>Segment Name</th>
+                                <th>Email Address</th>
+                                <th>Status</th>
+                                <th>Desc</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                {% for item in email_results %}
+                                <td>
+                                    <h6></h6>
+                                </td>
+                                <td>
+                                    {{item[0]}}
+                                </td>
+                                <td>
+                                    <a href="/segment?id={{item[1]}}">{{item[6]}}</a>
+                                </td>
+                                <td><span>{{item[7]}}</span></td>
+                                <td>
+                                    {{item[4]}}
+                                </td>
+                                <td>
+                                   {{item[5]}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+                </div>
+            </div>
+            <script>
+                function myFunction() {
+                    location.reload();
+                }
+
+                $(document).ready(function(){
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
+            </script>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+
+
+{% endblock %}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  {% extends "base.html" %}
+{% block title %}DASHBOARD {% endblock %}
+{% block head %}
+  {{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fade.css') }}">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<style>
+
+body {
+    counter-reset: my-sec-counter;
+}
+.PROCESSED
+{
+    color:white;
+    background-color:#3ac73a;
+    padding:8px;
+}
+.ACTIVE
+{
+
+    color:white;
+    background-color:#1e7490;
+    padding:8px;
+}
+.PROCESSING
+{
+
+    color:white;
+    background-color:#b11b3e;
+    padding:8px;
+}
+.QUEUED
+{
+    pointer-events: none;
+    color:white;
+    background-color:#5bc0de;
+    padding:8px;
+}
+.PUBLISHED
+{
+    pointer-events: none;
+    color:white;
+    background-color:#5bc0de;
+    padding:8px;
+}
+
+h6:before {
+    counter-increment: my-sec-counter;
+    content: "" counter(my-sec-counter) ". ";
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="important">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row" id="main" >
+                <div class="col-sm-12 col-md-12 well" id="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 style="float:left;width:300px;">Email Campaigns</h5>
+                            <a class="btn btn-info" style="float:right;margin-bottom:5px;"
+                               href="/create-campaign">Create New Campaign</a>
+                        </div>
+                    </div>
+
+                    <form method="POST" role="form">
+
+
+                        <table class="table table-bordered ">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Segment Name</th>
+                                <th>State</th>
+                                <th>Status</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                {% for item in email_campaigns %}
+                                <td>
+                                    <a href="/dashboard?campaign_id={{item[0]}}">{{item[5]}}</a>
+                                </td>
+                                <td>
+                                    <a href="/list_segment?id={{item[8]}}">{{item[9]}}</a>
+                                </td>
+                                <td>
+                                    <span class="{{item[4]}}">{{item[4]}}</span>
+                                </td>
+
+                               <td>
+                                    <span class="{{item[7]}}">{{item[7]}}</span>
+                                </td>
+
+                                <td>
+                                    <span class="{{item[7]}}">
+                                        <input type="hidden" value="{{item[0]}}" id="get_id">
+                                        <input class="toggle-class" value="{{item[0]}}" type="checkbox" id="toggle-one"  data-toggle="toggle" name="toggle_data">
+                                    </span>
+                                </td>
+                                <td>
+                                    <!--<button type="button" data-href="/update_compaign?id={{ item[0] }}" id="my-form1"-->
+                                            <!--data-toggle="modal" data-target="#updateModal" class="btn btn-info updatebutton">-->
+                                            <!--Edit</button>-->
+
+                                    <span class="{{item[4]}}"><button type="button" data-href="/delete_compaign?id={{ item[0] }}" id="my-form"
+                                            data-toggle="modal" data-target="#deleteModal" class="btn btn-default deletebutton">
+                                        Delete</button></span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+
+                    </form>
+                </div>
+
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <input type="hidden" id="hiddentext" />
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="deleteModalLabel">Delete this entry</h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this Record?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                <button href="#" type="button" class="btn btn-primary" id="modalButton">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script>
+    $('.toggle-class').on( 'change', function() {
+     var toggle_status= $(this).is(':checked');
+     var campaignId = $(this).val();
+     <!--alert(campaignId)-->
+     if(toggle_status == true)
+     {
+      $.ajax({
+            type: "POST",
+            url: "{{url_for('toggle_data')}}",
+
+            data : {'data':toggle_status, 'id':campaignId},
+            dataType : "json",
+            success: function (data)
+            {
+            console.log(data);
+            }
+        });
+     }
+     else
+     {
+     $.ajax({
+            type: "POST",
+            url: "{{url_for('toggle_data')}}",
+            data : {'data':toggle_status, 'id':campaignId},
+            dataType : "json",
+            success: function (data)
+            {
+            console.log(data);
+            }
+        });
+     }
+    });
+</script>
+{% endblock %}
