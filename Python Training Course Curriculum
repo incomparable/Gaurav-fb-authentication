@@ -1,0 +1,76 @@
+Python :
+
+Overview
+Installation(Linux(Ubuntu), Python)
+Environment
+Python Basic Syntax
+Python Variable Types
+Python Numbers
+Python Type Casting
+Python Strings
+Python Basic Operators
+Python Lists
+Python Tuples
+Python Dictionary
+Python Decision Making
+Python For Loops
+Python while Loops
+Python Functions
+Python Lambda
+Python Classes/Objects
+Python Iterators
+Python Modules
+Python Files I/O
+Python Date & Time
+python JSON
+Python RegEx
+Python PIP
+Python Exceptions
+Python File Handling
+
+
+Django Framework
+Database Access(MySQL, PostgreSQL, Sqlite)
+The Model Layer
+Model syntax
+Field Types
+Model Class
+Executing queries
+QuerySets
+Model instances
+Conditional Expressions
+Transactions
+The View Layer
+URLconfs
+View Functions
+Shortcuts
+Decorators
+Built-in views
+Request/Response objects
+File objects
+Managing Files
+Sending Email
+The Template Layer
+Language Overview
+Built in tags and filters
+Forms
+Built in fields
+Forms for models
+Model forms
+Built in fields
+Built in widgets
+Validations
+The Admin Site
+Admin actions
+Tools
+Authentication
+Emails
+Pagination
+Sessions
+Static file management
+Data validation
+
+Extra:
+Github/Bitbucket
+Deploy on server(live demo)
+

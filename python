@@ -1,0 +1,97 @@
+Introduction to your first program with Python, data types and variables
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+>>> print('welcome')
+welcome
+>>> print 'welcome'
+  File "<stdin>", line 1
+    print 'welcome'
+                  ^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print('welcome')?
+
+
+data types
+''''''''''
+>>> type(2)
+<class 'int'>
+>>> type(2.2)
+<class 'float'>
+>>> type(200000000)
+<class 'int'>
+>>> type(True)
+<class 'bool'>
+>>> type('a')
+<class 'str'>
+
+
+variables
+'''''''''
+
+>>> number = 2
+>>> real = 2.2
+>>> word = "word"
+>>> print(word)
+word
+>>> a=b=c=1.5
+>>> print(a)
+1.5
+>>> print(b)
+1.5
+>>> print(c)
+1.5
+>>> 
+>>> one, two, three = 1, 'two', 3.0
+>>> print(one)
+1
+>>> print(two)
+two
+>>> print(three)
+3.0
+
+>>> number =1
+>>> str = 'string'
+>>> number = str
+>>> import keyword
+>>> keyword.kwlist
+['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+
+
+Indentation
+''''''''''''
+def test():
+    statement1
+    statement2
+    statement3
+    statement4
+
+def test2():
+    statement1
+    statement2
+    statement3
+    statement4
+
+How to clear screen
+''''''''''''''''''''
+import os
+clear = lambda: os.system('cls')
+clear()
+
+print()
+
+Comments in Python
+'''''''''''''''''''
+
+# single line comment
+
+''' 
+multiple 
+lines 
+comments
+
+
+/*
+*/
+'''
+
+
+
+
